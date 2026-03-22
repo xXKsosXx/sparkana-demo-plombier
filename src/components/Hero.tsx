@@ -1,5 +1,6 @@
 import { PhoneCall, FileText, Shield, Clock, File } from "lucide-react";
 import Image from "next/image";
+import BadgeDisponibilite from "./BadgeDisponibilite";
 
 export function Hero() {
   return (
@@ -23,6 +24,10 @@ export function Hero() {
             Plomberie, chauffage et climatisation pour les particuliers et professionnels du Gard.
             Intervention rapide, devis gratuit.
           </p>
+
+          <div className="mt-6">
+            <BadgeDisponibilite />
+          </div>
 
           <div className="mt-8 flex flex-wrap gap-4">
             <a
