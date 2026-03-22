@@ -41,7 +41,7 @@ export function ZoneIntervention() {
             <div className="relative">
               <div className="overflow-hidden rounded-3xl">
                 <Image
-                  src="/images/carte-gard.svg"
+                  src="/images/carte-gard.png"
                   alt="Carte du Gard - Zone d'intervention"
                   width={600}
                   height={500}
