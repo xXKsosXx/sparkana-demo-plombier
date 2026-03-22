@@ -6,8 +6,8 @@ import { schemaTypes } from "./src/sanity/schemas";
 export default defineConfig({
   name: "fabre-plomberie",
   title: "Fabre Plomberie & Chauffage",
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "tigzcfg2",
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
+  projectId: "tigzcfg2",
+  dataset: "production",
   basePath: "/studio",
   plugins: [structureTool(), visionTool()],
   schema: {
