@@ -1,0 +1,16 @@
+const service = {
+  name: "service",
+  title: "Service",
+  type: "document",
+  fields: [
+    { name: "titre", title: "Titre", type: "string" },
+    { name: "description", title: "Description", type: "text" },
+    { name: "icone", title: "Nom icône Lucide", type: "string" },
+    { name: "ordre", title: "Ordre d'affichage", type: "number" },
+  ],
+  orderings: [
+    { title: "Ordre", name: "ordreAsc", by: [{ field: "ordre", direction: "asc" }] },
+  ],
+};
+
+export default service;
