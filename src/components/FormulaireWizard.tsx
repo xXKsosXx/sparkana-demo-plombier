@@ -18,15 +18,15 @@ const problemesWizard = [
   { id: "chauffe-eau", label: "Chauffe-eau", icon: <Flame size={24} /> },
   { id: "salle-bain", label: "Salle de bain", icon: <Bath size={24} /> },
   { id: "chauffage", label: "Chauffage/PAC", icon: <Flame size={24} /> },
-  { id: "debouchage", label: "D\u00E9bouchage", icon: <Zap size={24} /> },
+  { id: "debouchage", label: "Débouchage", icon: <Zap size={24} /> },
   { id: "autre", label: "Autre", icon: <Wrench size={24} /> },
 ];
 
 const villesGard = [
-  "N\u00EEmes",
-  "Uz\u00E8s",
-  "Al\u00E8s",
-  "Bagnols-sur-C\u00E8ze",
+  "Nîmes",
+  "Uzès",
+  "Alès",
+  "Bagnols-sur-Cèze",
   "Le Grau-du-Roi",
   "Beaucaire",
   "Saint-Gilles",
@@ -42,16 +42,24 @@ export default function FormulaireWizard() {
     ville: "",
     nom: "",
     telephone: "",
-    email: "",
     description: "",
   });
 
   const handleSubmit = async () => {
+    const typeLabel =
+      problemesWizard.find((p) => p.id === data.probleme)?.label || data.probleme;
+
     try {
       await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          nom: data.nom,
+          telephone: data.telephone,
+          ville: data.ville,
+          type: typeLabel,
+          description: data.description,
+        }),
       });
       setSubmitted(true);
     } catch (e) {
@@ -66,7 +74,7 @@ export default function FormulaireWizard() {
           <Check size={32} className="text-green-600" />
         </div>
         <h3 className="text-2xl font-extrabold text-primary font-headline mb-3">
-          Demande re\u00E7ue !
+          Demande reçue !
         </h3>
         <p className="text-on-surface-variant">
           M. Fabre vous rappelle sous 2h maximum.
@@ -90,7 +98,7 @@ export default function FormulaireWizard() {
       </div>
 
       <div className="p-8 md:p-10">
-        {/* \u00C9tape indicator */}
+        {/* Étape indicator */}
         <div className="flex items-center gap-2 mb-8">
           {[1, 2, 3].map((s) => (
             <div key={s} className="flex items-center gap-2">
@@ -117,15 +125,15 @@ export default function FormulaireWizard() {
           <span className="ml-3 text-xs text-on-surface-variant uppercase tracking-wider">
             {step === 1 && "Votre besoin"}
             {step === 2 && "Votre localisation"}
-            {step === 3 && "Vos coordonn\u00E9es"}
+            {step === 3 && "Vos coordonnées"}
           </span>
         </div>
 
-        {/* \u00C9TAPE 1 \u2014 Probl\u00E8me */}
+        {/* ÉTAPE 1 — Problème */}
         {step === 1 && (
           <div className="animate-fade-in">
             <h3 className="text-xl font-extrabold text-primary font-headline mb-6">
-              Quel est votre probl\u00E8me ?
+              Quel est votre problème ?
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {problemesWizard.map((p) => (
@@ -142,21 +150,23 @@ export default function FormulaireWizard() {
                   }`}
                 >
                   <div className="text-secondary-container mb-2">{p.icon}</div>
-                  <div className="text-sm font-bold text-primary">{p.label}</div>
+                  <div className="text-sm font-bold text-primary">
+                    {p.label}
+                  </div>
                 </button>
               ))}
             </div>
           </div>
         )}
 
-        {/* \u00C9TAPE 2 \u2014 Ville */}
+        {/* ÉTAPE 2 — Ville */}
         {step === 2 && (
           <div className="animate-fade-in">
             <h3 className="text-xl font-extrabold text-primary font-headline mb-2">
-              O\u00F9 intervenons-nous ?
+              Où intervenons-nous ?
             </h3>
             <p className="text-on-surface-variant text-sm mb-6">
-              Nous couvrons tout le d\u00E9partement du Gard (30).
+              Nous couvrons tout le département du Gard (30).
             </p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
               {villesGard.map((ville) => (
@@ -172,7 +182,10 @@ export default function FormulaireWizard() {
                       : "border-gray-200 hover:border-secondary-container/50 text-on-surface-variant"
                   }`}
                 >
-                  <MapPin size={14} className="text-secondary-container shrink-0" />
+                  <MapPin
+                    size={14}
+                    className="text-secondary-container shrink-0"
+                  />
                   {ville}
                 </button>
               ))}
@@ -186,7 +199,7 @@ export default function FormulaireWizard() {
           </div>
         )}
 
-        {/* \u00C9TAPE 3 \u2014 Coordonn\u00E9es */}
+        {/* ÉTAPE 3 — Coordonnées */}
         {step === 3 && (
           <div className="animate-fade-in">
             <h3 className="text-xl font-extrabold text-primary font-headline mb-6">
@@ -207,7 +220,7 @@ export default function FormulaireWizard() {
               </div>
               <div>
                 <label className="text-xs font-bold uppercase tracking-wider text-primary block mb-2">
-                  T\u00E9l\u00E9phone *
+                  Téléphone *
                 </label>
                 <input
                   type="tel"
@@ -221,7 +234,7 @@ export default function FormulaireWizard() {
               </div>
               <div>
                 <label className="text-xs font-bold uppercase tracking-wider text-primary block mb-2">
-                  Pr\u00E9cisions (optionnel)
+                  Précisions (optionnel)
                 </label>
                 <textarea
                   value={data.description}
@@ -229,22 +242,22 @@ export default function FormulaireWizard() {
                     setData({ ...data, description: e.target.value })
                   }
                   className="w-full border-b-2 border-gray-200 focus:border-secondary-container outline-none py-3 text-primary bg-transparent transition-colors resize-none"
-                  placeholder="D\u00E9crivez bri\u00E8vement le probl\u00E8me..."
+                  placeholder="Décrivez brièvement le problème..."
                   rows={3}
                 />
               </div>
             </div>
 
-            {/* R\u00E9cap */}
+            {/* Récap */}
             <div className="bg-surface-container-low rounded-xl p-4 mb-6 text-sm text-on-surface-variant">
               <div className="font-bold text-primary mb-2 text-xs uppercase tracking-wider">
-                R\u00E9capitulatif
+                Récapitulatif
               </div>
               <div className="flex gap-4">
                 <span>
                   {problemesWizard.find((p) => p.id === data.probleme)?.label}
                 </span>
-                <span>\u00B7</span>
+                <span>&middot;</span>
                 <span>{data.ville}</span>
               </div>
             </div>

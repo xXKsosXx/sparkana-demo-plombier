@@ -25,49 +25,49 @@ const problemes: Probleme[] = [
     id: "fuite",
     label: "Fuite d'eau",
     icon: <Droplets size={28} />,
-    fourchette: "80\u20AC \u2014 350\u20AC",
+    fourchette: "80€ — 350€",
     delai: "Intervention sous 2h",
     description:
-      "Recherche et r\u00E9paration de fuite, joint, raccord ou canalisation.",
+      "Recherche et réparation de fuite, joint, raccord ou canalisation.",
     urgence: "tres-urgent",
   },
   {
     id: "chauffe-eau",
     label: "Chauffe-eau",
     icon: <Flame size={28} />,
-    fourchette: "150\u20AC \u2014 900\u20AC",
+    fourchette: "150€ — 900€",
     delai: "Intervention sous 24h",
     description:
-      "Remplacement ou r\u00E9paration de ballon eau chaude ou thermodynamique.",
+      "Remplacement ou réparation de ballon eau chaude ou thermodynamique.",
     urgence: "urgent",
   },
   {
     id: "salle-bain",
     label: "Salle de bain",
     icon: <Bath size={28} />,
-    fourchette: "500\u20AC \u2014 8 000\u20AC",
+    fourchette: "500€ — 8 000€",
     delai: "Devis sous 48h",
     description:
-      "R\u00E9novation partielle ou compl\u00E8te, douche italienne, robinetterie.",
+      "Rénovation partielle ou complète, douche italienne, robinetterie.",
     urgence: "normal",
   },
   {
     id: "chauffage",
     label: "Chauffage / PAC",
     icon: <Flame size={28} />,
-    fourchette: "800\u20AC \u2014 12 000\u20AC",
+    fourchette: "800€ — 12 000€",
     delai: "Devis sous 48h",
     description:
-      "Installation pompe \u00E0 chaleur, chaudi\u00E8re ou plancher chauffant.",
+      "Installation pompe à chaleur, chaudière ou plancher chauffant.",
     urgence: "normal",
   },
   {
     id: "debouchage",
-    label: "D\u00E9bouchage",
+    label: "Débouchage",
     icon: <Zap size={28} />,
-    fourchette: "90\u20AC \u2014 280\u20AC",
+    fourchette: "90€ — 280€",
     delai: "Intervention sous 2h",
-    description: "Canalisation bouch\u00E9e, WC, \u00E9vier ou siphon.",
+    description: "Canalisation bouchée, WC, évier ou siphon.",
     urgence: "tres-urgent",
   },
   {
@@ -75,7 +75,7 @@ const problemes: Probleme[] = [
     label: "Autre travaux",
     icon: <Wrench size={28} />,
     fourchette: "Sur devis gratuit",
-    delai: "R\u00E9ponse sous 24h",
+    delai: "Réponse sous 24h",
     description: "Tout autre intervention plomberie ou chauffage.",
     urgence: "normal",
   },
@@ -119,12 +119,12 @@ export default function EstimateurPrix() {
             Quel est votre besoin ?
           </h2>
           <p className="text-on-surface-variant max-w-lg mx-auto">
-            S\u00E9lectionnez votre probl\u00E8me pour obtenir une fourchette de
-            prix instantan\u00E9e.
+            Sélectionnez votre problème pour obtenir une fourchette de prix
+            instantanée.
           </p>
         </div>
 
-        {/* Grid des probl\u00E8mes */}
+        {/* Grid des problèmes */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
           {problemes.map((p) => (
             <button
@@ -138,7 +138,9 @@ export default function EstimateurPrix() {
             >
               <div
                 className={`mb-4 transition-colors ${
-                  selected === p.id ? "text-secondary-container" : "text-secondary"
+                  selected === p.id
+                    ? "text-secondary-container"
+                    : "text-secondary"
                 }`}
               >
                 {p.icon}
@@ -154,7 +156,7 @@ export default function EstimateurPrix() {
           ))}
         </div>
 
-        {/* R\u00E9sultat anim\u00E9 */}
+        {/* Résultat animé */}
         {selectedProbleme && (
           <div
             className={`rounded-2xl p-8 border-2 transition-all duration-500 animate-fade-in ${
@@ -207,7 +209,7 @@ export default function EstimateurPrix() {
                 href="#contact"
                 className="flex items-center justify-center gap-2 border-2 border-primary/20 text-primary px-6 py-3 rounded-xl font-bold text-sm hover:border-primary transition-colors"
               >
-                Demander un devis \u00E9crit
+                Demander un devis écrit
               </a>
             </div>
           </div>
